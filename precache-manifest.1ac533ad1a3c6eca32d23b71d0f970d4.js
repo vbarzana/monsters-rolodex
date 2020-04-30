@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1bfe3c582528cb22e56e6a103a405519",
+    "revision": "f49a758665d99029e01c673cfa9a362e",
     "url": "/monsters-rolodex/index.html"
   },
   {
-    "revision": "3182908a674dc1f899cf",
-    "url": "/monsters-rolodex/static/css/main.4341edda.chunk.css"
+    "revision": "2026c5520731fa43423f",
+    "url": "/monsters-rolodex/static/css/main.25221b51.chunk.css"
   },
   {
     "revision": "a2e4be9481a54b890f97",
@@ -16,15 +16,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/monsters-rolodex/static/js/2.7aaef059.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "3182908a674dc1f899cf",
-    "url": "/monsters-rolodex/static/js/main.9e460515.chunk.js"
+    "revision": "2026c5520731fa43423f",
+    "url": "/monsters-rolodex/static/js/main.2c03698a.chunk.js"
   },
   {
     "revision": "f051cecc4ee3cb3b301f",
     "url": "/monsters-rolodex/static/js/runtime-main.eea62ddf.js"
-  },
-  {
-    "revision": "5d5d9eefa31e5e13a6610d9fa7a283bb",
-    "url": "/monsters-rolodex/static/media/logo.5d5d9eef.svg"
   }
 ]);
