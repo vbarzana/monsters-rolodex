@@ -1,62 +1,45 @@
-import React, { Component } from "react";
-import "./App.scss";
-import { CardList } from "./components/card-list/card-list.component";
-import { SearchBox } from "./components/search-box/search-box.component";
+import { useState, useEffect } from 'react';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      monsters: [],
-      search: "",
-    };
-    this.lastSearch = "";
-  }
+import CardList from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.component';
+import './App.css';
 
-  componentDidMount() {
-    const staticPersons = ["dariel", "marcos", "guelmis", "victor"].map((person) => {
-      return {
-        name: person.charAt(0).toUpperCase() + person.substr(1, person.length),
-        email: `${person}-monster@codegenio.com`,
-        image: `${process.env.PUBLIC_URL}/assets/img/${person}-zombie.jpg`
-      };
+const App = () => {
+  const [searchField, setSearchField] = useState('');
+  const [monsters, setMonsters] = useState([]);
+  const [filteredMonsters, setFilterMonsters] = useState(monsters);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((response) => response.json())
+      .then((users) => setMonsters(users));
+  }, []);
+
+  useEffect(() => {
+    const newFilteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchField);
     });
-  
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => {
-        return response.json();
-      })
-      .then((users) => {
-        this.setState({
-          monsters: staticPersons.concat(users),
-        });
-      });
-  }
 
-  handleChange = (e) => {
-    this.setState({ searchField: e.target.value });
+    setFilterMonsters(newFilteredMonsters);
+  }, [monsters, searchField]);
+
+  const onSearchChange = (event) => {
+    const searchFieldString = event.target.value.toLocaleLowerCase();
+    setSearchField(searchFieldString);
   };
 
-  render() {
-    const { monsters, searchField } = this.state;
-    let filteredMonsters = monsters;
-    if (this.lastSearch !== searchField && searchField) {
-      filteredMonsters = monsters.filter((monster) => {
-        return monster.name.toLowerCase().includes(searchField.toLowerCase());
-      });
-    }
-    this.lastSearch = searchField;
-    return (
-      <div className="App">
-        <h1>Monsters RoloDex</h1>
-        <SearchBox
-          placeholder="search monsters"
-          handleChange={this.handleChange}
-        />
-        <CardList monsters={filteredMonsters} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className='App'>
+      <h1 className='app-title'>Monsters Rolodex</h1>
+
+      <SearchBox
+        className='monsters-search-box'
+        onChangeHandler={onSearchChange}
+        placeholder='search monsters'
+      />
+      <CardList monsters={filteredMonsters} />
+    </div>
+  );
+};
 
 export default App;
